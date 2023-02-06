@@ -1,0 +1,22 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: nginx-test3-vs
+  labels:
+    app: nginx-test3
+    version: 0.0.1
+    backstage.io/kubernetes-id: nginx-test3
+spec:
+  gateways:
+  - istio-gateway/apps-gateway
+  hosts:
+  - nginx-test3.apps.wwtlab.net
+  http:
+  - name: primary
+    route:
+    - destination:
+        host: nginx-test3-svc
+        port:
+          number: 80
+      weight: 100
